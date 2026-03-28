@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
-import axios from "axios";
+import API from "../api/axios";
 import { useEffect } from "react";
 import toast from 'react-hot-toast';
 const Dashboard = () => {
@@ -23,7 +23,7 @@ const Dashboard = () => {
   const fetchSecrets=async()=>{
     try {
       const token=localStorage.getItem("token");
-      const res=await axios.get("http://localhost:5000/api/secrets/all",{
+      const res=await API.get("http://localhost:5000/api/secrets/all",{
         headers: {"x-auth-token": token}
       });
       setSecrets(res.data);
@@ -84,7 +84,7 @@ const Dashboard = () => {
       const token=localStorage.getItem("token");
       const url=isEditing ? `http://localhost:5000/api/secrets/update/${currentId}` : "http://localhost:5000/api/secrets/add";
       const method=isEditing ? "put":"post";
-      const res=await axios[method](url,{...formData,category:selectedCategory},{
+      const res=await API[method](url,{...formData,category:selectedCategory},{
         headers: {"x-auth-token": token}
       });
       toast.success(res.data.msg);
@@ -131,7 +131,7 @@ const Dashboard = () => {
     if(!window.confirm("Delete this secret permanently?")) return;
     try {
       const token=localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/secrets/${targetId}`,{
+      await API.delete(`http://localhost:5000/api/secrets/${targetId}`,{
         headers: {"x-auth-token": token}
       });
       toast.success("Secret deleted permanently");
