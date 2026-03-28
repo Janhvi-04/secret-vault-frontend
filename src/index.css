@@ -1,0 +1,14 @@
+@import "tailwindcss";
+/* This targets the autofill state specifically */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #1f2937; /* This is gray-800 to match your text */
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px white !important; /* Forces the bg to stay white */
+}
+.font-cursive {
+  font-family: 'Dancing Script', cursive;
+}
