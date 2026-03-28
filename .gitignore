@@ -1,8 +1,4 @@
-# Security: Sensitive Environment Variables
-.env
-.env.production
-.env.development
-.env.local
+
 
 # Logs
 logs
