@@ -23,7 +23,7 @@ const Dashboard = () => {
   const fetchSecrets=async()=>{
     try {
       const token=localStorage.getItem("token");
-      const res=await API.get("http://localhost:5000/api/secrets/all",{
+      const res=await API.get("/secrets/all",{
         headers: {"x-auth-token": token}
       });
       setSecrets(res.data);
@@ -82,7 +82,7 @@ const Dashboard = () => {
     }
     try{
       const token=localStorage.getItem("token");
-      const url=isEditing ? `http://localhost:5000/api/secrets/update/${currentId}` : "http://localhost:5000/api/secrets/add";
+      const url=isEditing ? `/secrets/update/${currentId}` : "/secrets/add";
       const method=isEditing ? "put":"post";
       const res=await API[method](url,{...formData,category:selectedCategory},{
         headers: {"x-auth-token": token}
@@ -131,7 +131,7 @@ const Dashboard = () => {
     if(!window.confirm("Delete this secret permanently?")) return;
     try {
       const token=localStorage.getItem("token");
-      await API.delete(`http://localhost:5000/api/secrets/${targetId}`,{
+      await API.delete(`/secrets/${targetId}`,{
         headers: {"x-auth-token": token}
       });
       toast.success("Secret deleted permanently");
